@@ -36,6 +36,7 @@ public class DriverClass {
   //____________________________
 class LinkedList{
   Node company; 
+  int size = 0;
   public LinkedList () {
     company = null;
   }
@@ -46,9 +47,32 @@ class LinkedList{
   
   public void addNewEmployee (Employee e) {
     Node temp = new Node();
+    temp.setE(e);
+    int newSize = size + 1;
     if (company == null){
-      temp.setE(e);
-      company.setNext(temp);
+      company = temp;
+      company.setNext(null);
+      size++;
+      return;
+    }
+    Node traverseListNode = company;
+    while (newSize>size) {
+      traverseListNode = determineBelowOrNext(traverseListNode, temp);
+    }
+    traverseListNode.setNext(temp);
+    traverseListNode.getNext().getNext().setNext(null);
+  }
+
+  private Node determineBelowOrNext(Node node1, Node node2 ){
+    Employee emp1 = node1.getE();
+    Employee emp2 = node2.getE();
+
+    if (emp1.getId() == emp2.getId()){
+      return node1.getBelow();
+    }
+
+    else {
+      return node1.getNext();
     }
   }
   public boolean searchByName (String name) {
@@ -59,6 +83,16 @@ class LinkedList{
   }
   public void deleteEmployeeByName (String name) {
   //...
+  }
+
+  private Node searchByID(Node node, int ID){
+    Employee emp1 = node.getE();
+    Node temp = node;
+    
+   if()
+      
+    
+
   }
 }
   //______________________________
@@ -159,8 +193,8 @@ class Employee {
 
 class Node {
   private Employee e;     //Keep these fields private!
-  private Node next;
-  private Node below;
+  private Node next = null;
+  private Node below = null;
   
   public Employee getE() {
     return e;

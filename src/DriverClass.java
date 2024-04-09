@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class DriverClass {
   public static void main(String[] args) {
     LinkedList list = new LinkedList();
@@ -111,14 +113,30 @@ class Employee {
     return netSalary;
   }
 
-  public void setNetSalary(double netSalary) {
-    this.netSalary = netSalary;
+  private int calcID(String name){
+    int rez = 0;
+    name = name.toUpperCase();
+    int len = name.length();
+    for (int i = 0; i<len; i++){
+      
+    }
+    return rez;
+  }
+  public Employee (String name, double salary, int numberOfDependent){
+    this.name = name;
+    this.salary = salary;
+    this.numberOfDependent = numberOfDependent;
+    this.netSalary = salary*0.91+(numberOfDependent*0.01*salary);
   }
 
-  //----------------------------------------------
-  //----------------------------------------------
-  //----------------------------------------------
+/*   public void setNetSalary(double netSalary) {
+    this.netSalary = netSalary;
+  } */
 
+  //----------------------------------------------
+  //----------------------------------------------
+  //----------------------------------------------
+  
   @Override
   public String toString () {
     return "...";

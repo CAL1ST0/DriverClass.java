@@ -37,6 +37,8 @@ public class DriverClass {
 class LinkedList{
   Node company; 
   int size = 0;
+
+  ArrayList <Double> netSalArr = new ArrayList <Double>();
   public LinkedList () {
     company = null;
   }
@@ -46,6 +48,7 @@ class LinkedList{
   
   
   public void addNewEmployee (Employee e) {
+    netSalArr.add(e.getNetSalary());
     Node temp = new Node();
     temp.setE(e);
     if (company == null){
@@ -108,9 +111,22 @@ class LinkedList{
       }
     }
   }
+  
   public double highestNetSalary () {
-  //...
+    if (company == null){
+      return 0.00;
+    }
+    else{
+      double netSal = company.getE().getNetSalary();
+      for(int i = 0; i<size; i++){
+        if(netSal<netSalArr.get(i)){
+          netSal = netSalArr.get(i);
+        }
+      }
+      return netSal;
+    }
   }
+
   public void deleteEmployeeByName (String name) {
   //...
   }

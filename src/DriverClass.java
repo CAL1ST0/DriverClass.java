@@ -68,6 +68,7 @@ class LinkedList{
       }
       var.setNext(temp);
       var.getNext().getNext().setNext(null);
+      size++;
     }
     else{
       while (foundNode.getBelow()!=null) {
@@ -75,12 +76,37 @@ class LinkedList{
       }
       foundNode.setBelow(temp);
       foundNode.getBelow().getBelow().setBelow(null);
+      size++;
     }
   }
 
 
   public boolean searchByName (String name) {
-  //...
+    Node node = company;
+    Employee temp = new Employee();
+    int empID = temp.calcID(name);
+    Node foundNode = searchByID(node, empID);
+
+    if (foundNode == null){
+      return false;
+    }
+    
+    else{
+      if(foundNode.getE().getName() == name){
+        return true;
+      }
+      else{
+        while(foundNode.getBelow()!=null){
+          if(foundNode.getE().getName() == name){
+            return true;
+          }
+          else{
+            foundNode = foundNode.getBelow();
+          }
+        }
+        return false;
+      }
+    }
   }
   public double highestNetSalary () {
   //...
@@ -103,7 +129,7 @@ class LinkedList{
       return node;
     }
     else
-      searchByID(node.getNext(), nodeID);
+      searchByID(node.getNext(), ID);
     
 
   }
@@ -166,7 +192,7 @@ class Employee {
 
   //takes every letter in a string and capitalizes it,
   //then adds the values to find the ID of the Employee
-  private int calcID(String name){
+  public int calcID(String name){
     int rez = 0;
     name = name.toUpperCase();
     int len = name.length();
@@ -184,6 +210,8 @@ class Employee {
     this.netSalary = salary*0.91+(numberOfDependent*0.01*salary);
     this.id = calcID(this.name);
   }
+
+  public Employee(){}
 
 /*   public void setNetSalary(double netSalary) {
     this.netSalary = netSalary;

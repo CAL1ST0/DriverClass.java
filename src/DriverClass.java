@@ -48,33 +48,37 @@ class LinkedList{
   public void addNewEmployee (Employee e) {
     Node temp = new Node();
     temp.setE(e);
-    int newSize = size + 1;
     if (company == null){
       company = temp;
       company.setNext(null);
       size++;
       return;
     }
+    
     Node traverseListNode = company;
-    while (newSize>size) {
-      traverseListNode = determineBelowOrNext(traverseListNode, temp);
+    Node var = company;
+
+    //if ID is found, the node gets added to below branch
+    //otherwise it gets added to the next branch
+    Node foundNode = searchByID(traverseListNode, e.getId());
+    
+    if (foundNode == null){
+      while (var.getNext() != null) {
+        var = var.getNext();
+      }
+      var.setNext(temp);
+      var.getNext().getNext().setNext(null);
     }
-    traverseListNode.setNext(temp);
-    traverseListNode.getNext().getNext().setNext(null);
+    else{
+      while (foundNode.getBelow()!=null) {
+        foundNode = foundNode.getBelow();
+      }
+      foundNode.setBelow(temp);
+      foundNode.getBelow().getBelow().setBelow(null);
+    }
   }
 
-  private Node determineBelowOrNext(Node node1, Node node2 ){
-    Employee emp1 = node1.getE();
-    Employee emp2 = node2.getE();
 
-    if (emp1.getId() == emp2.getId()){
-      return node1.getBelow();
-    }
-
-    else {
-      return node1.getNext();
-    }
-  }
   public boolean searchByName (String name) {
   //...
   }
@@ -85,12 +89,21 @@ class LinkedList{
   //...
   }
 
+  //recursively searches through a linked list
+  //to find an ID
   private Node searchByID(Node node, int ID){
     Employee emp1 = node.getE();
+    int nodeID = emp1.getId();
     Node temp = node;
-    
-   if()
-      
+   
+    if (node == null){
+      return node;
+    }
+    else if(nodeID == ID){
+      return node;
+    }
+    else
+      searchByID(node.getNext(), nodeID);
     
 
   }

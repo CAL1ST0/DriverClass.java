@@ -16,7 +16,7 @@ public class DriverClass {
   
     list.printAllEmployees();
   
-    System.out.println("The highest net salary = " list.highestNetSalary());
+    System.out.println("The highest net salary = " + list.highestNetSalary());
   
     list.deleteEmployeeByName("Rim Oz");
     list.deleteEmployeeByName("Nadia Jones");

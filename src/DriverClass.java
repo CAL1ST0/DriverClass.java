@@ -42,8 +42,23 @@ class LinkedList{
   public LinkedList () {
     company = null;
   }
+  
   public void printAllEmployees () {
-    
+    Node travelNode = company;
+    while (travelNode != null) {
+      System.out.println(travelNode.getE());
+
+      if(travelNode.getBelow() != null){
+        Node travelBelowNode = travelNode;
+        while (travelBelowNode != null ) {
+          System.out.println(travelBelowNode.getE());
+          travelBelowNode = travelBelowNode.getBelow();
+        }
+        travelNode = travelNode.getNext();
+      }
+
+      travelNode = travelNode.getNext();
+    }
   }
   
   

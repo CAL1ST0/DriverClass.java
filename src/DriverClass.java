@@ -43,7 +43,7 @@ class LinkedList{
     company = null;
   }
   public void printAllEmployees () {
-  //...
+    
   }
   
   
@@ -239,7 +239,7 @@ class Employee {
   
   @Override
   public String toString () {
-    return "...";
+    return id + name + netSalary;
   }
   //...
 

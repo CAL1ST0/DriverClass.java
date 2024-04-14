@@ -143,7 +143,6 @@ class LinkedList{
   }
 
   public void deleteEmployeeByName (String name) {
-    int flag = -1;
     Employee temp = new Employee();
     int findID = temp.calcID(name);
     Node delNode = searchByID(company, findID);
@@ -181,44 +180,39 @@ class LinkedList{
 
   //recursively searches through a linked list
   //to find an ID
-  private Node searchByID(Node node, int ID){
-    Employee emp1 = node.getE();
-    int nodeID = emp1.getId();
-    Node temp = node;
-   
-    if (node == null){
-      return node;
-    }
-    else if(nodeID == ID){
-      return node;
-    }
-    else
-      searchByID(node.getNext(), ID);
-    
-
-  }
-}
-
-private Node returnPrevNode(Node head, Node node){
-  if(head == null || node == null){
-    return null;
-  }
-  else{
+  private Node searchByID(Node head, int ID){
     Node temp = head;
-    while (temp.getNext().getE().getId() != node.getE().getId()) {
+
+    while(temp != null && temp.getE().getId() != ID){
       temp = temp.getNext();
     }
-    if(temp.getNext().getE().getName() != node.getE().getName()){
-      temp = temp.getNext();
-      while(temp.getBelow().getE().getName() != node.getE().getName()){
-        temp = temp.getBelow();
-      }
-      return temp;
+   return temp;
+
+  }
+
+
+  private Node returnPrevNode(Node head, Node node){
+    if(head == null || node == null){
+      return null;
     }
     else{
-      return temp;
+      Node temp = head;
+      while (temp.getNext().getE().getId() != node.getE().getId()) {
+        temp = temp.getNext();
+      }
+      if(temp.getNext().getE().getName() != node.getE().getName()){
+        temp = temp.getNext();
+        while(temp.getBelow().getE().getName() != node.getE().getName()){
+          temp = temp.getBelow();
+        }
+        return temp;
+      }
+      else{
+        return temp;
+      }
     }
   }
+
 }
   //______________________________
   

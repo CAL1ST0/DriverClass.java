@@ -143,7 +143,40 @@ class LinkedList{
   }
 
   public void deleteEmployeeByName (String name) {
-  //...
+    int flag = -1;
+    Employee temp = new Employee();
+    int findID = temp.calcID(name);
+    Node delNode = searchByID(company, findID);
+    if (delNode == null){
+      System.out.println(name+ " name not found.");
+      return;
+    }
+    else{
+      Node delNext = returnPrevNode(company, delNode);
+
+      //delnode is a tail
+      if(delNode.getNext() == null && delNode.getBelow() == null){
+        delNext.setNext(null);
+      }
+
+      //delnode is in the middle with no bottom
+      else if (delNode.getNext() != null && delNext.getBelow() == null){
+        delNext.setNext(delNode.getNext());
+      }
+
+      //delnode is in the middle of a below list
+      else if (delNode.getNext() == null && delNode.getBelow() != null){
+        delNext.setBelow(delNode.getBelow());
+      }
+
+      //delnode in middle and has bottom
+      else if (delNode.getNext()!= null && delNode.getBelow() != null){
+        delNode.getBelow().setNext(delNode.getNext());
+        delNext.setNext(delNode.getBelow());
+        
+      }
+    }
+
   }
 
   //recursively searches through a linked list
@@ -163,6 +196,28 @@ class LinkedList{
       searchByID(node.getNext(), ID);
     
 
+  }
+}
+
+private Node returnPrevNode(Node head, Node node){
+  if(head == null || node == null){
+    return null;
+  }
+  else{
+    Node temp = head;
+    while (temp.getNext().getE().getId() != node.getE().getId()) {
+      temp = temp.getNext();
+    }
+    if(temp.getNext().getE().getName() != node.getE().getName()){
+      temp = temp.getNext();
+      while(temp.getBelow().getE().getName() != node.getE().getName()){
+        temp = temp.getBelow();
+      }
+      return temp;
+    }
+    else{
+      return temp;
+    }
   }
 }
   //______________________________

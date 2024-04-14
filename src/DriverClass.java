@@ -11,7 +11,6 @@ public class DriverClass {
     list.addNewEmployee(new Employee ("Nadia Jones", 5035.5, 3));
     list.addNewEmployee(new Employee ("Ed Renu", 6035, 2));
     list.addNewEmployee(new Employee ("Naadi Jones", 36035.75, 5));
-  
     //The TAs may use less or more names. 
   
     list.printAllEmployees();
@@ -46,12 +45,12 @@ class LinkedList{
   public void printAllEmployees () {
     Node travelNode = company;
     while (travelNode != null) {
-      System.out.println(travelNode.getE());
+      System.out.print(travelNode.getE());
 
       if(travelNode.getBelow() != null){
         Node travelBelowNode = travelNode;
         while (travelBelowNode != null ) {
-          System.out.println(travelBelowNode.getE());
+          System.out.print(travelBelowNode.getE());
           travelBelowNode = travelBelowNode.getBelow();
         }
         travelNode = travelNode.getNext();
@@ -85,7 +84,7 @@ class LinkedList{
         var = var.getNext();
       }
       var.setNext(temp);
-      var.getNext().getNext().setNext(null);
+      var.getNext().setNext(null);
       size++;
     }
     else{
@@ -93,7 +92,7 @@ class LinkedList{
         foundNode = foundNode.getBelow();
       }
       foundNode.setBelow(temp);
-      foundNode.getBelow().getBelow().setBelow(null);
+      foundNode.getBelow().setBelow(null);
       size++;
     }
   }
@@ -178,7 +177,7 @@ class LinkedList{
 
   }
 
-  //recursively searches through a linked list
+  //searches through a linked list
   //to find an ID
   private Node searchByID(Node head, int ID){
     Node temp = head;
@@ -274,9 +273,13 @@ class Employee {
   //then adds the values to find the ID of the Employee
   public int calcID(String name){
     int rez = 0;
+    String str = "0, 1";
     name = name.toUpperCase();
     int len = name.length();
-    
+    if(name.charAt(len-1) == str.charAt(2)){
+      name = name.trim();
+      len = len-1;
+    }
     for (int i = 0; i<len; i++){
       rez += name.charAt(i);
     }
@@ -303,7 +306,8 @@ class Employee {
   
   @Override
   public String toString () {
-    return id + name + netSalary;
+    System.out.println("["+id+", "+name+", "+netSalary+"]");
+    return"";
   }
   //...
 

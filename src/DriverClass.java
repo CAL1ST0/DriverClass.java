@@ -152,11 +152,17 @@ class LinkedList{
       return;
     }
     else{
-      Node delNext = returnPrevNode(company, delNode);
+
+      while(delNode.getBelow() != null && delNode.getE().getName() != name){
+        delNode = delNode.getBelow();
+      }
+
+      Node delNext = returnPrevNode(company, delNode, name);
 
       //delnode is a tail
       if(delNode.getNext() == null && delNode.getBelow() == null){
         delNext.setNext(null);
+        delNext.setBelow(null);
       }
 
       //delnode is in the middle with no bottom
@@ -171,8 +177,9 @@ class LinkedList{
 
       //delnode in middle and has bottom
       else if (delNode.getNext()!= null && delNode.getBelow() != null){
-        delNode.getBelow().setNext(delNode.getNext());
-        delNext.setNext(delNode.getBelow());
+        Node tempNode = delNode.getBelow();
+        tempNode.setNext(delNode.getNext());
+        delNext.setNext(tempNode);
         
       }
     }
@@ -192,23 +199,32 @@ class LinkedList{
   }
 
 
-  private Node returnPrevNode(Node head, Node node){
+  private Node returnPrevNode(Node head, Node node, String name){
     if(head == null || node == null){
       return null;
     }
     else{
+      
+      if(node.getBelow()!= null && node.getBelow().getE().getName() == name){
+        return node;
+      }
+
       Node temp = head;
       while (temp.getNext().getE().getId() != node.getE().getId()) {
         temp = temp.getNext();
       }
-      if(temp.getNext().getE().getName() != node.getE().getName()){
+      if(temp.getNext().getE().getName() == name){
+        return temp;
+        
+      }
+      else{
+        while (node.getBelow() != null && node.getE().getName() != name ){
+          node = node.getBelow();
+        }
         temp = temp.getNext();
         while(temp.getBelow().getE().getName() != node.getE().getName()){
           temp = temp.getBelow();
         }
-        return temp;
-      }
-      else{
         return temp;
       }
     }

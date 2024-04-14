@@ -48,7 +48,7 @@ class LinkedList{
       System.out.print(travelNode.getE());
 
       if(travelNode.getBelow() != null){
-        Node travelBelowNode = travelNode;
+        Node travelBelowNode = travelNode.getBelow();
         while (travelBelowNode != null ) {
           System.out.print(travelBelowNode.getE());
           travelBelowNode = travelBelowNode.getBelow();
@@ -56,7 +56,9 @@ class LinkedList{
         travelNode = travelNode.getNext();
       }
 
-      travelNode = travelNode.getNext();
+      else {
+        travelNode = travelNode.getNext();
+      }
     }
   }
   
